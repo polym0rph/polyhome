@@ -1,0 +1,16 @@
+handlers:
+- url: '/'
+  static_files: '_site/index.html'
+  upload: '_site/.*'
+- url: /images/(.*)
+  static_files: '_site/images/\1'
+  upload: '_site/.*'
+- url: /css/(.*)
+  static_files: '_site/css/\1'
+  upload: '_site/.*'
+- url: '/(.*)'
+  static_files: '_site/\1/index.html'
+  upload: '_site/.*'  
+- url: '/(.*)/(.*)'
+  static_files: '_site/\1/\2/index.html'
+  upload: '_site/.*'
