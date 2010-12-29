@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="Frederik Rudeck">	
+	<title>Frederik Rudeck - Random Racer</title>
+	<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen"/>
+</head>
+<body>
+ 
+<div id="wrap">
+	<div id="header">
+		<div id="header_wrap">
+			<div id="heading">
+				<a href="/">FREDERIK RUDECK</a>
+			</div>
+			<ul id="header_site_navigation">
+				
+				   <li>
+				
+					<a href="/">Home</a></li>
+				
+					<li class='current'>
+				
+					<a href="/projects/">Projects</a></li>
+				
+				   <li>
+				
+					<a href="/about/">About</a></li>
+				
+				   <li>
+				
+					<a href="/contact/">Contact</a></li>
+			</ul>	
+		</div>
+	</div>
+	<div id="main" class="clearfix">
+		<div id="content_wrap">
+			
+			<h2>Random Racer</h2>
+<p class="project_member_border">Becker, T., Rudeck, F., and Timm, R.</p>
+<p><img src="/images/random_racer.png" alt="" /></p>
+<h3>About</h3>
+<p>Random Racer is a small game (aka tech-demo) developed at the <a href="http://hpi.uni-potsdam.de"><span class="caps">HPI</span></a> which is part of the <a href="http://www.uni-potsdam.de">University of Potsdam</a>. In a course of the chair <a href="http://www.hpi.uni-potsdam.de/~doellner/computergrafische_systeme">Computer Grafik</a> the task was to develop a 3D application. We chose Random Racer because we wanted to have several challenging features. See the <a href="#features">Features</a> section for more information.</p>
+<p>In the game you can drive over a practical unending big terrain which gets calculated at runtime and have fun while cruising with a physically modeled car over hills and valleys. If you like you can also collect coins, but this can also be disabled in the <a href="#console">console</a>.</p>
+<p>Random Racer was mainly developed on Mac OS X, but runs on Linux as well. Since we did not use many <span class="caps">UNIX</span> specific APIs, it should not be hard to port it to Windows.</p>
+<p>Random Racer is completely written in C++. Rendering in done via <span class="caps">VRS</span> (<a href="http://vrs3d.org">Virtual Rendering System</a>) which uses OpenGL, threading is implemented via the <span class="caps">SDL</span> (<a href="http://libsdl.org">Simple Direct Media Layer</a>) abstraction, for physics <span class="caps">ODE</span> (<a href="http://ode.org">Open Dynamics Engine</a>) is used.</p>
+<h3>Screenshots</h3>
+<p><img src="/images/random_racer_1.png" alt="" /> <img src="/images/random_racer_2.png" alt="" /> <img src="/images/random_racer_3.png" alt="" /></p>
+<h3 id="features">Features</h3>
+<h4>Multi threading</h4>
+<p>Random Racer is multi-threaded, we have 3 tasks which get done in parallel. At first there is the main thread which runs <span class="caps">VRS</span> and which renders our 3D scene. The second is the physics thread which calculates everything including the movement of the car on the terrain. And at last there is a terrain generation thread which by the usage of <span class="caps">NURBS</span> calculates new terrains in the background.</p>
+<p>This separation gives us a big performance increase in contrast to a single threaded architecture because all this 3 tasks can be done mostly independent from each other and alone the separation of the physics thread boosts the frame rate drastically. On recent multi-core machines you get the biggest benefit from this.</p>
+<p>Also the terrain generation by usage of the <span class="caps">NURBS</span> can take up to 3 seconds also on 1 GHz machines and would be nearly impossible to realize in 1 thread without lags.</p>
+<h4><span class="caps">NURBS</span> and Terrain Generation</h4>
+<p>We use a Non-Uniform Rational B-Splines (<span class="caps">NURBS</span>) implementation for our terrain generation. The basic implementation of the <span class="caps">NURBS</span> algorithm is taken from <a href="http://www.robthebloke.org/opengl_programming.html">robthebloke.org</a>. This sample was ported to C++ and adjusted to fit our requirements.</p>
+<p>The algorithm to generates the terrain mesh is based on a algorithm designed by Cox and de Boor. This calculates the resulting points of our surface depending on given control points, which lie in a raster on our surface.</p>
+<p>The big advantage of using <span class="caps">NURBS</span> is the smooth transition between terrain parts. A second benefit is that we can create nice terrain meshes with a relative low number of control points.</p>
+<p>The control points are randomly generated. The algorithm generates in multiple rounds control points with a random position and height (between 0-1). We parametrise the generation so that we can have more hilly terrain in the lower height area and some few high mountains. To set this parameters see the <a href="#console">console reference</a>.</p>
+<h4>Terrain Loading</h4>
+<p>As already mentioned, all the visible terrain gets generated in the background by usage of <span class="caps">NURBS</span> and must then be shown as a 3D model. For the reloading of the terrain we have chosen to use <span class="caps">ODE</span> functionality in the form of 8 planes, this planes trigger replacements of the terrain when the car collides with them.</p>
+<p>We have 4 planes for a big visible terrain which gets shown in <span class="caps">VRS</span> as a mesh and 4 for a smaller part for the physics which gets extracted from this bigger visible terrain (across threads).</p>
+<p>This planes get moved to approximate the driving direction so that as less as possible replacements of the terrain take part.</p>
+<p>By usage of this architecture you can drive over a practically unending terrain, whose only border is the maximum size of an integer, so you get hours of playing experience with no reload times and no repeating terrain.</p>
+<h4>Physics engine</h4>
+<p>We wrote a library, which wraps most of the <span class="caps">ODE</span> functionality. Since ODE&#8217;s <span class="caps">API</span> is just C, we put it into classes to have it fit our object oriented application structure. Physical objects can be created by encapsulating scene nodes of the rendering system. All data provided by the physics engine is fed back into the scene graph after every world step (physics update). All physics calculations run in its own thread and syncs with <span class="caps">VRS</span> rendering thread.</p>
+<p>The library is called <span class="caps">VRSODE</span> and is completely independent from Random Racer itself. It can be used in any application which wants to use <span class="caps">VRS</span> and <span class="caps">ODE</span> together.</p>
+<h4>Physics enabled car</h4>
+<p>Ioannis Pistofidis provided us with a low polygon car model (&lt;1800 triangles) including a set of nice textures. This is now the default car in Random Racer.</p>
+<p>All components of the car like wheels, suspension and chassis are encapsulated by physics bodies. They are connected via different types of joints to create components like springs and axes. This creates the realistic behavior of the car.</p>
+<p>You can drive the car using the normal arrow keys and the space key is the handbrake, if you made a accident and cannot drive further you may want to use the <em>car_reset</em> command on the console.</p>
+<h4 id="console">In-game console</h4>
+<p>Random Racer also features a home-brewed in-game console, press ^ or &lt; to toggle it. With the up and down keys you can browse the history and tab or shift-tab tab-completes forwards or backwards your current word.</p>
+<p>Backspace or delete deletes the last character and CTRL+U deletes the whole line. If you press enter in a empty line, the last command is repeated.</p>
+<p>Also gdb-style shortcuts have been implemented, if you type <em>fu</em> and <em>fullscreen</em> is the only command which starts with <em>fu</em>, this will be executed so you do not have to type the full name.</p>
+<p>You can also configure Random Racer with a file called autoexec.txt, all commands in this file will be executed when Random Racer starts. This file will be read from <em>~/.random_racer/</em> on Linux and <em>~/Library/Application Support/Random Racer/</em> on Mac OS X. All lines in the file which are not empty and do not start with a # (which means comment) will be executed as if they were typed on the console in the interactive way.</p>
+<p>Below is a list of the commands which are currently implemented, you can pass <em>true</em>, <em>1</em>, <em>false</em> or <em>0</em> to the most command which toggle something and they should do what you expect, to all commands which manipulate a special value, passing numbers in a default notation (23.0, -42, etc) should also work.</p>
+<table>
+	<tr class="odd">
+		<th>Command</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>autoexec</td>
+		<td>Runs the autoexec.txt again.</td>
+	</tr>
+	<tr class="odd">
+		<td>cam_back</td>
+		<td>Sets the offset the camera is back to the car, use negative values of you want to look from before the car. If you give no argument this shows the current value of cam_back.</td>
+	</tr>
+	<tr>
+		<td>cam_correct</td>
+		<td>Sets the amount of units the camera looks &#8220;over&#8221; the car, increase this, if you want to see the are not in the center of the screen.</td>
+	</tr>
+	<tr class="odd">
+		<td>cam_fog</td>
+		<td>Enables of disables the distance fog, if enabled new parts of the terrain become visible more smoothly.</td>
+	</tr>
+	<tr>
+		<td>cam_fov</td>
+		<td>Use this if you want to see more of the landscape.</td>
+	</tr>
+	<tr class="odd">
+		<td>cam_reset</td>
+		<td>Resets the camera to some default values if you played around too much.</td>
+	</tr>
+	<tr>
+		<td>cam_static</td>
+		<td>You can adjust if the camera is static or not, static in this context means that it will always look down to the car in the same angle. If it is not static, if will change the viewing angle depending on the cars affinity. The best is to enable this and disable it and drive down and up a hill, this should demonstrate the effect the best :).</td>
+	</tr>
+	<tr class="odd">
+		<td>cam_up</td>
+		<td>By changing this variable you can adjust how much the camera look from over the car down the car, 0 means from directly behind the car and negative values will look from the ground up to the car.</td>
+	</tr>
+	<tr>
+		<td>car_position</td>
+		<td>Prints the current position of the car to the console, so you can see how far you did drive (You start at {0 0 0}).</td>
+	</tr>
+	<tr class="odd">
+		<td>car_reset</td>
+		<td>Resets the car in rotation and moves it a bit up, use this if you can not drive and made accident.</td>
+	</tr>
+	<tr>
+		<td>collect_coins</td>
+		<td>Enable or disable the collecting and the spawning of the coins (aka Toruses).</td>
+	</tr>
+	<tr class="odd">
+		<td>fullscreen</td>
+		<td>Toggles full-screen display.</td>
+	</tr>
+	<tr>
+		<td>phy_debug</td>
+		<td>Enables of disables the visibility of <em>all</em> physics<br />
+debug bodies.</td>
+	</tr>
+	<tr class="odd">
+		<td>phy_preformance_adjust</td>
+		<td>This command is highly experimental. If enabled the physics thread will automatically score your system speed and adjust phy_step_size and phy_step_time automatically.</td>
+	</tr>
+	<tr>
+		<td>phy_step_size</td>
+		<td>Lets you get and set the step size calculated in every physics update. Smaller steps need more <span class="caps">CPU</span> power but enable a more correct simulation.</td>
+	</tr>
+	<tr class="odd">
+		<td>phy_step_time</td>
+		<td>Lets you get and set the time the physics thread will wait for the next update. This is only done if the physics update itself did not take all the time set in phy_step_time. This is used to save <span class="caps">CPU</span> time.</td>
+	</tr>
+	<tr>
+		<td>quit</td>
+		<td>Well, this gracefully quits Random Racer in the 1337 way.</td>
+	</tr>
+	<tr class="odd">
+		<td>ter_debug_phy</td>
+		<td>This enables or disables the visibility of the trimesh which represents the current terrain the physics engine uses for its calculations (works pretty well in combination with <em>ter_texture debug</em>) <em>This command is kind of experimental and may crash Random Racer because of a threading issue</em>.</td>
+	</tr>
+	<tr>
+		<td>ter_debug_planes</td>
+		<td>Use this if you want to see just the reload planes which we use to trigger replacements of the current terrain, valid values are <em>vrs</em>,<br />
+<em>ode</em> and <em>none</em> to disable them.</td>
+	</tr>
+	<tr class="odd">
+		<td>ter_lowrounds</td>
+		<td>With this command you can set the rounds of which the Random Control Point Generator will generate the Height of the Control Points between 0 &#8211; and a value, which can be set with ter_midheight. With no parameter it will show you the actual number of rounds.</td>
+	</tr>
+	<tr>
+		<td>ter_midheight</td>
+		<td>Sets the variable, which influence the Height of the generated Control Points. If you set it for e.g. to 0.6 the Generator will generate values from 0 &#8211; 0.6 with a round number specified by ter_lowrounds and values from 0.6 &#8211; 1 with a round number specified by ter_uprounds</td>
+	</tr>
+	<tr class="odd">
+		<td>ter_texture</td>
+		<td>This changes the terrain texture. Available textures are <em>grass</em>, <em>mud</em>, <em>sand</em>, <em>debug</em> and <em>grid</em>. Just test and enjoy.</td>
+	</tr>
+	<tr>
+		<td>ter_uprounds</td>
+		<td>This changes the Number of Rounds with which the Generator creates Height values between a number specified with ter_midheight  and 1. With no parameter you will get the actual number of rounds.</td>
+	</tr>
+	<tr class="odd">
+		<td>version</td>
+		<td>Show a full version string of all components<br />
+on the console (Random Racer itself, <span class="caps">ODE</span>, <span class="caps">SDL</span> and <span class="caps">VRS</span>)</td>
+	</tr>
+</table>
+<h3>License</h3>
+<p>Random Racer is distributed under the <span class="caps">GNU</span> General Public License (<span class="caps">GPL</span>) as provided by the Free Software Foundation (<span class="caps">FSF</span>). (<a href="http://www.fsf.org/licensing/licenses/gpl.txt">http://www.fsf.org/licensing/licenses/gpl.txt</a>)</p>
+<h3>Building</h3>
+<p>Random Racer needs the following libraries:</p>
+<ul>
+	<li><span class="caps">VRS</span> Version 3.3</li>
+	<li><span class="caps">ODE</span> Version 0.8 built in <em>release mode</em> and with <em>double precision</em></li>
+	<li><span class="caps">SDL</span> Version 1.2.11</li>
+</ul>
+<p>To build Random Racer, download and unpack the archive, which is provided below.</p>
+<p class="code_back"><code>tar zxvf random_racer.tar.gz</code></p>
+<p>Change the file <em>Makefile.extras</em> if you want to add custom includes, libraries or compiler flags.</p>
+<p>Now you can start the building process and execute Random Racer, just type</p>
+<p class="code_back"><code>make run</code></p>
+<h3>Downloads</h3>
+<ul>
+	<li><a href="http://files.rtti.de/random-racer-1.1.0-r326.tar.bz2">Source</a> (18 MB Tarball)</li>
+	<li><a href="http://files.rtti.de/RandomRacer.dmg">Mac OS X Binary</a> (16 MB <span class="caps">DMG</span>)</li>
+</ul>
+<h3>Team Members</h3>
+<ul>
+	<li><a href="http://torstenbecker.eu/">Torsten Becker</a></li>
+	<li><a href="http://frederikrudeck.com/">Frederik Rudeck</a></li>
+	<li><a href="http://rtti.de/">Robert Timm</a></li>
+</ul>
+			
+		</div>
+	</div>
+</div>
+
+<div id="footer">
+	<div id="footer_wrap">
+		<div id="footer_credits">
+			<span>© 2010 Frederik Rudeck</span><br/>
+			<span>Hosted on <a href="http://code.google.com/appengine/">Google App Engine</a> and created with <a href="http://github.com/mojombo/jekyll">Jekyll</a>
+			</span>
+		</div>
+		<div id="footer_contact">
+			<a href="/">Home</a> | <a href="/projects">Projects</a> | <a href="/about">About</a> | <a href="/contact/">Contact </a>
+		</div>
+	</div>
+</div>
+  
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-12355283-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>
