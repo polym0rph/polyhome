@@ -8,6 +8,9 @@ handlers:
 - url: /css/(.*)
   static_files: '_site/css/\1'
   upload: '_site/.*'
+- url: /js/(.*)
+  static_files: '_site/js/\1'
+  upload: '_site/.*'
 - url: '/(.*)'
   static_files: '_site/\1/index.html'
   upload: '_site/.*'  

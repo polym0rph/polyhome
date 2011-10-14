@@ -1,73 +1,120 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<meta name="author" content="Frederik Rudeck">	
+	<meta charset="utf-8" />
 	<title>Frederik Rudeck - Lecture Browser</title>
-	<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen"/>
+	<meta name="author" content="Frederik Rudeck">	
+	
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"/>
+	<![endif]-->
+	
+	<!-- css -->
+	<link href="/css/bootstrap.min.css"
+		rel="stylesheet" type="text/css" media="screen"/>
+	<link href="/css/style.css"
+		rel="stylesheet" type="text/css" media="screen"/>
+	
+	<!-- javascript -->
+	<script src="/js/jquery-1.6.4.min.js"></script>
+	<script src="/js/bootstrap-dropdown.js"></script>
+	
+	<!-- fav icon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
 <body>
- 
+
 <div id="wrap">
-	<div id="header">
-		<div id="header_wrap">
-			<div id="heading">
-				<a href="/">FREDERIK RUDECK</a>
-			</div>
-			<ul id="header_site_navigation">
+
+<div class="topbar">
+	<div class="topbar-inner">
+		<div class="container">
+			<h3>
+				<a href="/">Frederik Rudeck</a>
+			</h3>
+			<ul class="nav secondary-nav">
 				
-				   <li>
+				<li>
 				
-					<a href="/">Home</a></li>
+					<a href="/">Home</a>
+				</li>
 				
-					<li class='current'>
+				<li class="dropdown active" data-dropdown="dropdown">
 				
-					<a href="/projects/">Projects</a></li>
+					<a href="/projects" class="dropdown-toggle">Projects</a>
+					<ul class="dropdown-menu">
+						<li><a href="/projects">Overview</a></li>
+						<li class="divider"></li>
+						
+						<li><a href="/projects/lumino/">Lumino</a></li>
+						
+						<li><a href="/projects/cga/">CGA tool chain on UNIX systems</a></li>
+						
+						<li><a href="/projects/demand-planning/">Demand Planning on Microsoft Surface</a></li>
+						
+						<li><a href="/projects/lecture-browser/">Bachelor's Project: Lecture Browser</a></li>
+						
+						<li><a href="/projects/random-racer/">Random Racer</a></li>
+						
+					</ul>
+				</li>
 				
-				   <li>
+				<li>
 				
-					<a href="/about/">About</a></li>
+					<a href="/about">About</a>
+				</li>
 				
-				   <li>
+				<li>
 				
-					<a href="/contact/">Contact</a></li>
-			</ul>	
+					<a href="/contact">Contact</a>
+				</li>
+			</ul>
 		</div>
 	</div>
-	<div id="main" class="clearfix">
-		<div id="content_wrap">
-			
-			<h2>Bachelor&#8217;s Project: Lecture Browser</h2>
-<p class="project_member_border">Barth, C., Becker, T., Hasselberg, H., and Rudeck, F.</p>
+</div>
+
+<div id="container-wrap">
+	<div id="container-wrap-inner">
+	<div class="container">
+		<div class="page-header">
+	<h2 class="project-header">Bachelor&#8217;s Project: Lecture Browser<br />
+		<small>Barth, C., Becker, T., Hasselberg, H., and Rudeck, F.</small>	</h2>
+</div>
 <p><img src="/images/lecture_browser.png" alt="" /></p>
-<h3>About</h3>
+<div class="page-header">
+	<h3>About</h3>
+</div>
 <p>The <a href="http://www.tele-task.de/">tele-<span class="caps">TASK</span></a> platform is an online archive managing a heavily increasing number of tele lectures and video recordings of scientific conferences. These resources are freely available for every internet user. The organization and preparation of content &#8211; video data in this case &#8211; is essential for the success of a web portal and for the usability. These tasks should be as convenient as possible for those who enter content into the platform.</p>
-<p>The goal of the project was to extend and enhance the tele-<span class="caps">TASK</span> platform with respect to the integration of semantic web technologies into the system and thus giving the user further possibilities for the purposeful search in multimedia data. The semantic data for the videos were generated with the help of <span class="caps">OCR</span> data and the extracted voice of the speaker. Moreover that the project developed a tool to create time-related notes for the recorded lectures.</p>
+<p>The goal of the project was to extend and enhance the tele-<span class="caps">TASK</span> platform with respect to the integration of semantic web technologies into the system and thus giving the user further possibilities for the purposeful search in multimedia data. The semantic data for the videos were generated with the help of <span class="caps">OCR</span> data and the extracted voice of the speaker. Moreover the project developed a tool to create time-related notes for the recorded lectures.</p>
 <p><a href="http://www.hpi.uni-potsdam.de/meinel/lehre/bachelor_projects/bp2007b3.html">University Project Page</a></p>
-<h3>Team Members</h3>
+<div class="page-header">
+	<h3>Team Members</h3>
+</div>
 <ul>
 	<li>Christoph Barth</li>
 	<li><a href="http://torstenbecker.eu/">Torsten Becker</a></li>
 	<li><a href="http://hanshasselberg.de/">Hans Hasselberg</a></li>
 	<li><a href="http://frederikrudeck.com/">Frederik Rudeck</a></li>
 </ul>
-			
-		</div>
+	</div>
 	</div>
 </div>
 
-<div id="footer">
-	<div id="footer_wrap">
-		<div id="footer_credits">
-			<span>© 2011 Frederik Rudeck</span><br/>
-			<span>Hosted on <a href="http://code.google.com/appengine/">Google App Engine</a> and created with <a href="http://github.com/mojombo/jekyll">Jekyll</a>
-			</span>
-		</div>
-		<div id="footer_contact">
-			<a href="/">Home</a> | <a href="/projects">Projects</a> | <a href="/about">About</a> | <a href="/contact/">Contact </a>
-		</div>
+</div> <!-- end of wrap -->
+
+<footer>
+	<div class="container">
+		<p>
+			© 2011 Frederik Rudeck
+			<br/>
+			Hosted on
+			<a href="http://code.google.com/appengine/">Google App Engine</a> 
+			and created with
+			<a href="http://github.com/mojombo/jekyll">Jekyll</a> and
+			<a href="http://twitter.github.com/bootstrap">Bootstrap</a>.
+		</p>
 	</div>
-</div>
+</footer>
   
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

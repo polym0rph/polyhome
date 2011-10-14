@@ -1,145 +1,217 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<meta name="author" content="Frederik Rudeck">	
+	<meta charset="utf-8" />
 	<title>Frederik Rudeck - Projects</title>
-	<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen"/>
+	<meta name="author" content="Frederik Rudeck">	
+	
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"/>
+	<![endif]-->
+	
+	<!-- css -->
+	<link href="/css/bootstrap.min.css"
+		rel="stylesheet" type="text/css" media="screen"/>
+	<link href="/css/style.css"
+		rel="stylesheet" type="text/css" media="screen"/>
+	
+	<!-- javascript -->
+	<script src="/js/jquery-1.6.4.min.js"></script>
+	<script src="/js/bootstrap-dropdown.js"></script>
+	
+	<!-- fav icon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
 <body>
- 
+
 <div id="wrap">
-	<div id="header">
-		<div id="header_wrap">
-			<div id="heading">
-				<a href="/">FREDERIK RUDECK</a>
-			</div>
-			<ul id="header_site_navigation">
-				
-				   <li>
-				
-					<a href="/">Home</a></li>
-				
-					<li class='current'>
-				
-					<a href="/projects/">Projects</a></li>
-				
-				   <li>
-				
-					<a href="/about/">About</a></li>
-				
-				   <li>
-				
-					<a href="/contact/">Contact</a></li>
-			</ul>	
-		</div>
-	</div>
-	<div id="main" class="clearfix">
-		<div id="content_wrap">
-			
-			
-<h3>Research Projects</h3>
-<div>	
-	
-		
-			<div class="project">
-				<div class="image_left">					
-					<a href="/projects/lumino/"><img src="/images/lumino_small.png"/></a>
-				</div>
-				<div class="abstract">
-					<a class="project_title" href="/projects/lumino/">Lumino</a>
-					<p class="project_member">Baudisch, P., Becker, T., and Rudeck, F.</p>
-					Lumino building blocks allow tabletop computers based on diffuse illumination to recognize objects arranged in a three-dimensional structure.
-				</div>
-			</div>
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-</div>
 
-<h3>University Projects</h3>
-<div>	
-	
-		
-	
-		
-			<div class="project">
-				<div class="image_left">					
-					<a href="/projects/cga/"><img src="/images/cga_small.png"/></a>
-				</div>
-				<div class="abstract">
-					<a class="project_title" href="/projects/cga/">CGA tool chain on UNIX systems</a>
-					<p class="project_member">Becker, T., Rudeck, F., and Timm, R.</p>
-					CGA is a software visualization tool to give insight into complex, large-scale, existing software systems and their physical composition and relations.
-				</div>
-			</div>
-		
-	
-		
-			<div class="project">
-				<div class="image_left">					
-					<a href="/projects/demand-planning/"><img src="/images/demand_planning_small.png"/></a>
-				</div>
-				<div class="abstract">
-					<a class="project_title" href="/projects/demand-planning/">Demand Planning on Microsoft Surface</a>
-					<p class="project_member">Tinnefeld, C., Mueller, S., Becker, T. and Rudeck, F.</p>
-					Geographic visualization of demand planning data stored in a SAP main-memory database on Microsoft Surface.
-				</div>
-			</div>
-		
-	
-		
-			<div class="project">
-				<div class="image_left">					
-					<a href="/projects/lecture-browser/"><img src="/images/lecture_browser_small.png"/></a>
-				</div>
-				<div class="abstract">
-					<a class="project_title" href="/projects/lecture-browser/">Bachelor's Project: Lecture Browser</a>
-					<p class="project_member">Barth, C., Becker, T., Hasselberg, H., and Rudeck, F.</p>
-					Enhancing the tele-TASK platform with the functionality to search the content of multimedia data and to annotate the recorded lectures.
-				</div>
-			</div>
-		
-	
-		
-			<div class="project">
-				<div class="image_left">					
-					<a href="/projects/random-racer/"><img src="/images/random_racer_small.png"/></a>
-				</div>
-				<div class="abstract">
-					<a class="project_title" href="/projects/random-racer/">Random Racer</a>
-					<p class="project_member">Becker, T., Rudeck, F., and Timm, R.</p>
-					3D racing game with procedurally generated NURBS-based endless terrain, multi-threaded physics and Quake-style console for Mac OS X.
-				</div>
-			</div>
-		
-	
-</div>
-
-			
+<div class="topbar">
+	<div class="topbar-inner">
+		<div class="container">
+			<h3>
+				<a href="/">Frederik Rudeck</a>
+			</h3>
+			<ul class="nav secondary-nav">
+				
+				<li>
+				
+					<a href="/">Home</a>
+				</li>
+				
+				<li class="dropdown active" data-dropdown="dropdown">
+				
+					<a href="/projects" class="dropdown-toggle">Projects</a>
+					<ul class="dropdown-menu">
+						<li><a href="/projects">Overview</a></li>
+						<li class="divider"></li>
+						
+						<li><a href="/projects/lumino/">Lumino</a></li>
+						
+						<li><a href="/projects/cga/">CGA tool chain on UNIX systems</a></li>
+						
+						<li><a href="/projects/demand-planning/">Demand Planning on Microsoft Surface</a></li>
+						
+						<li><a href="/projects/lecture-browser/">Bachelor's Project: Lecture Browser</a></li>
+						
+						<li><a href="/projects/random-racer/">Random Racer</a></li>
+						
+					</ul>
+				</li>
+				
+				<li>
+				
+					<a href="/about">About</a>
+				</li>
+				
+				<li>
+				
+					<a href="/contact">Contact</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
 
-<div id="footer">
-	<div id="footer_wrap">
-		<div id="footer_credits">
-			<span>© 2011 Frederik Rudeck</span><br/>
-			<span>Hosted on <a href="http://code.google.com/appengine/">Google App Engine</a> and created with <a href="http://github.com/mojombo/jekyll">Jekyll</a>
-			</span>
-		</div>
-		<div id="footer_contact">
-			<a href="/">Home</a> | <a href="/projects">Projects</a> | <a href="/about">About</a> | <a href="/contact/">Contact </a>
-		</div>
+<div id="container-wrap">
+	<div id="container-wrap-inner">
+	<div class="container">
+		<div class="page-header">
+	<h2>Research Projects</h2>
+</div>
+
+
+	
+		<div class="row">
+	<div class="span3">
+		<ul class="media-grid">
+		  <li>
+		    <a href="/projects/lumino/">
+		      <img src="/images/lumino_small.png" alt=""/>
+		    </a>
+		  </li>
+		</ul>
+	</div>
+	<div class="span7">
+		<a class="project-name" href="/projects/lumino/">Lumino</a>
+		<p class="project-member"><small>Baudisch, P., Becker, T., and Rudeck, F.</small></p>
+		<p>Lumino building blocks allow tabletop computers based on diffuse illumination to recognize objects arranged in a three-dimensional structure.</p>
 	</div>
 </div>
+	
+
+	
+
+	
+
+	
+
+	
+
+
+<div class="page-header">
+	<h2>University Projects</h2>
+</div>
+
+
+	
+
+	
+		<div class="row">
+	<div class="span3">
+		<ul class="media-grid">
+		  <li>
+		    <a href="/projects/cga/">
+		      <img src="/images/cga_small.png" alt=""/>
+		    </a>
+		  </li>
+		</ul>
+	</div>
+	<div class="span7">
+		<a class="project-name" href="/projects/cga/">CGA tool chain on UNIX systems</a>
+		<p class="project-member"><small>Becker, T., Rudeck, F., and Timm, R.</small></p>
+		<p>CGA is a software visualization tool to give insight into complex, large-scale, existing software systems and their physical composition and relations.</p>
+	</div>
+</div>
+	
+
+	
+		<div class="row">
+	<div class="span3">
+		<ul class="media-grid">
+		  <li>
+		    <a href="/projects/demand-planning/">
+		      <img src="/images/demand_planning_small.png" alt=""/>
+		    </a>
+		  </li>
+		</ul>
+	</div>
+	<div class="span7">
+		<a class="project-name" href="/projects/demand-planning/">Demand Planning on Microsoft Surface</a>
+		<p class="project-member"><small>Tinnefeld, C., Mueller, S., Becker, T. and Rudeck, F.</small></p>
+		<p>Geographic visualization of demand planning data stored in a SAP main-memory database on Microsoft Surface.</p>
+	</div>
+</div>
+	
+
+	
+		<div class="row">
+	<div class="span3">
+		<ul class="media-grid">
+		  <li>
+		    <a href="/projects/lecture-browser/">
+		      <img src="/images/lecture_browser_small.png" alt=""/>
+		    </a>
+		  </li>
+		</ul>
+	</div>
+	<div class="span7">
+		<a class="project-name" href="/projects/lecture-browser/">Bachelor's Project: Lecture Browser</a>
+		<p class="project-member"><small>Barth, C., Becker, T., Hasselberg, H., and Rudeck, F.</small></p>
+		<p>Enhancing the tele-TASK platform with the functionality to search the content of multimedia data and to annotate the recorded lectures.</p>
+	</div>
+</div>
+	
+
+	
+		<div class="row">
+	<div class="span3">
+		<ul class="media-grid">
+		  <li>
+		    <a href="/projects/random-racer/">
+		      <img src="/images/random_racer_small.png" alt=""/>
+		    </a>
+		  </li>
+		</ul>
+	</div>
+	<div class="span7">
+		<a class="project-name" href="/projects/random-racer/">Random Racer</a>
+		<p class="project-member"><small>Becker, T., Rudeck, F., and Timm, R.</small></p>
+		<p>3D racing game with procedurally generated NURBS-based endless terrain, multi-threaded physics and Quake-style console for Mac OS X.</p>
+	</div>
+</div>
+	
+
+
+	</div>
+	</div>
+</div>
+
+</div> <!-- end of wrap -->
+
+<footer>
+	<div class="container">
+		<p>
+			© 2011 Frederik Rudeck
+			<br/>
+			Hosted on
+			<a href="http://code.google.com/appengine/">Google App Engine</a> 
+			and created with
+			<a href="http://github.com/mojombo/jekyll">Jekyll</a> and
+			<a href="http://twitter.github.com/bootstrap">Bootstrap</a>.
+		</p>
+	</div>
+</footer>
   
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
