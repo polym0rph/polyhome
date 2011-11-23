@@ -24,8 +24,6 @@
 </head>
 <body>
 
-<div id="wrap">
-
 <div class="topbar">
 	<div class="topbar-inner">
 		<div class="container">
@@ -63,18 +61,12 @@
 				
 					<a href="/about">About</a>
 				</li>
-				
-				<li>
-				
-					<a href="/contact">Contact</a>
-				</li>
 			</ul>
 		</div>
 	</div>
 </div>
 
-<div id="container-wrap">
-	<div id="container-wrap-inner">
+<div id="container-wrap">	
 	<div class="container">
 		<div class="page-header">
 	<h2 class="project-header">Random Racer<br />
@@ -100,7 +92,7 @@
 <p>This separation gives us a big performance increase in contrast to a single threaded architecture because all 3 tasks can be done mostly independent from each other and alone the separation of the physics thread boosts the frame rate drastically. On recent multi-core machines you get the biggest benefit from this.</p>
 <p>The terrain generation can take up to 3 seconds also on 1 GHz machines and would be nearly impossible to realize in 1 thread without lags.</p>
 <h4><span class="caps">NURBS</span> and Terrain Generation</h4>
-<p>We use a Non-Uniform Rational B-Splines (<span class="caps">NURBS</span>) implementation for our terrain generation. The basic implementation of the <span class="caps">NURBS</span> algorithm is taken from <a href="http://www.robthebloke.org/opengl_programming.html">robthebloke.org</a>. This sample was ported to C++ and adjusted to fit our requirements.</p>
+<p>We use a Non-Uniform Rational B-Splines (<span class="caps">NURBS</span>) implementation for our terrain generation. The basic implementation of the <span class="caps">NURBS</span> algorithm is taken from <a href="http://nccastaff.bournemouth.ac.uk/jmacey/RobTheBloke/www/opengl_programming.html">robthebloke.org</a>. This sample was ported to C++ and adjusted to fit our requirements.</p>
 <p>The algorithm to generate the terrain mesh is based on a algorithm designed by Cox and de Boor. It calculates the resulting points of our surface depending on given control points, which lie in a raster on our surface.</p>
 <p>The big advantage of using <span class="caps">NURBS</span> is the smooth transition between terrain parts. A second benefit is that we can create nice terrain meshes with a relative low number of control points.</p>
 <p>The control points are randomly generated. The algorithm generates  control points with a random position and height (between 0-1) in multiple rounds. We parametrize the generation so that we can have more hilly terrain in the lower height area and some few high mountains. To set this parameters see the <a href="#console">console reference</a>.</p>
@@ -258,10 +250,7 @@
 	<li><a href="http://rtti.de/">Robert Timm</a></li>
 </ul>
 	</div>
-	</div>
 </div>
-
-</div> <!-- end of wrap -->
 
 <footer>
 	<div class="container">
